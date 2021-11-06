@@ -1,3 +1,27 @@
+resource "random_id" "main" {
+  count = var.node_group_name == null && var.node_group_name_prefix == null ? 1 : 0
+
+  byte_length = 4
+
+  keepers = {
+    ami_type       = var.ami_type
+    disk_size      = var.disk_size
+    instance_types = var.instance_types != null ? join("|", var.instance_types) : ""
+    capacity_type  = var.capacity_type
+    node_role_arn  = var.node_role_arn
+
+    ec2_ssh_key               = var.ec2_ssh_key
+    source_security_group_ids = join("|", var.source_security_group_ids)
+
+    subnet_ids           = join("|", var.subnet_ids)
+    cluster_name         = var.cluster_name
+    launch_template_id   = lookup(var.launch_template, "id", "")
+    launch_template_name = lookup(var.launch_template, "name", "")
+  }
+}
+
+
+
 resource "aws_eks_node_group" "main" {
   cluster_name = var.cluster_name
 
