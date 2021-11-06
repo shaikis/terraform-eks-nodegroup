@@ -35,6 +35,7 @@ variable "disk_size" {
 }
 variable "ami_type" {
     type = string
+    default = "null"
 }
 variable "subnet_ids" {
     type = list(string)
