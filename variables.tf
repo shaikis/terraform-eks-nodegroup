@@ -42,7 +42,7 @@ variable "subnet_ids" {
 }
 variable "node_role_arn" {
     type = string
-    default =  null
+    default = null
 }
 variable "node_group_name" {
     type = string
