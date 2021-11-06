@@ -81,6 +81,7 @@ resource "aws_eks_node_group" "main" {
     create_before_destroy = true
     ignore_changes        = [scaling_config.0.desired_size]
   }
+  depends_on         = [aws_iam_role.main]
 }
 
 resource "aws_iam_role" "main" {
